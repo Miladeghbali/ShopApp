@@ -12,7 +12,7 @@ namespace ShopApp.WinClinet.Ioc
     {
         public TypesRegistry()
         {
-            
+            For<IProductCategoriesRepository>().Use<ProductCategoriesRepository>();
             For<IProductUnitsRepository>().Use<ProductUnitsRepository>();
             For<IInventoriesRepository>().Use<InventoriesRepository>();
             For<ICorporationsRepository>().Use<CorporationsRepository>();

@@ -32,7 +32,7 @@ namespace ShopApp.WinClinet
             });
             baseInfo.AddSeparator();
             baseInfo.AddMenu("انبار ها", null, (s, e) => { ViewEngine.ViewInTab<Views.Inventories.List>(); });
-            baseInfo.AddMenu("دسته بندی محصولات");
+            baseInfo.AddMenu("دسته بندی محصولات",null,(s,e)=>ViewEngine.ViewInTab<Views.ProductCategories.List>());
             baseInfo.AddMenu("محصولات");
             //baseInfo.AddMenu("گروه های کالا");
             //baseInfo.AddMenu("کالا ها ");

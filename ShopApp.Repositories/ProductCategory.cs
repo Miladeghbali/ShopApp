@@ -17,8 +17,12 @@ namespace ShopApp.Repositories
        }
        public List<Entities.ProductCategory>GetByParentCategoryId(int? value)
        {
-         return RunQuery("SELECT * FROM[dbo].[ProductCategories] WHERE [ParentCategoryId] = @Value", new SqlParameter("Value", value));
-       }
+            if(value.HasValue)
+                return RunQuery("SELECT * FROM[dbo].[ProductCategories] WHERE [ParentCategoryId] = @Value", new SqlParameter("Value", value));
+            else
+                return RunQuery("SELECT * FROM[dbo].[ProductCategories] WHERE [ParentCategoryId] IS Null");
+
+        }
        public List<Entities.ProductCategory>GetByTitle(string value)
        {
          return RunQuery("SELECT * FROM[dbo].[ProductCategories] WHERE [Title] LIKE @Value", new SqlParameter("Value", value));

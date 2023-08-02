@@ -65,6 +65,32 @@ namespace ShopApp.Framework
             
             return textBox;
         }
+        protected TextBox TextBox( string title, bool multiline = false)
+        {
+            var label = new Label();
+            label.Text = title;
+            label.AutoSize = true;
+            var textBox = new TextBox();
+            this.Controls.Add(label);
+            this.Controls.Add(textBox);            
+            textBox.Left = 20;
+            textBox.Top = 10;
+            textBox.Width = 200;
+            textBox.Multiline = true;
+            if (multiline)
+            {
+                textBox.ScrollBars = ScrollBars.Vertical;
+                textBox.Height = 150;
+            }
+            createdControls.Add(new EntityEditorControl()
+            {
+                Label = label,
+                Control = textBox,
+                Priority = createdControls.Count + 1
+            });
+
+            return textBox;
+        }
         protected Dropdown DatePicker(Expression<Func<TEntity,DateTime>> selector,string title)
         {
             var label = new Label();
