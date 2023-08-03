@@ -67,6 +67,15 @@ namespace ShopApp.WinClinet.Views.ProductCategories
                     treeControl.InitRoots();
                 }                
             });
+            AddAction(" پارامترها", btn =>
+            {
+                if (treeControl.SelectedObject == null)
+                    return;
+                viewEngine.ViewInForm<Parameters>(view =>
+                {
+                    view.ProductCategoryId = treeControl.SelectedObject.ID;
+                },true);
+            });
         }
         protected override void OnLoad(EventArgs e)
         {

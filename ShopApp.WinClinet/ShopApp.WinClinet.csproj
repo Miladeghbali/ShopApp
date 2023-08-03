@@ -127,6 +127,30 @@
     <Compile Include="Views\ProductCategories\List.Designer.cs">
       <DependentUpon>List.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductCategories\ParameterEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ProductCategories\ParameterEditor.Designer.cs">
+      <DependentUpon>ParameterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductCategories\Parameters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ProductCategories\Parameters.Designer.cs">
+      <DependentUpon>Parameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Products\Editor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Products\Editor.Designer.cs">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Products\List.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Products\List.Designer.cs">
+      <DependentUpon>List.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProductUnits\Editor.cs">
       <SubType>UserControl</SubType>
     </Compile>
