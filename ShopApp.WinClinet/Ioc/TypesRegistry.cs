@@ -12,6 +12,7 @@ namespace ShopApp.WinClinet.Ioc
     {
         public TypesRegistry()
         {
+            For<IProductParametersValuesRepository>().Use<ProductParametersValuesRepository>();
             For<IProductsRepository>().Use<ProductsRepository>();
             For<IProductParametersRepository>().Use<ProductParametersRepository>();
             For<IProductCategoriesRepository>().Use<ProductCategoriesRepository>();

@@ -36,7 +36,7 @@ namespace ShopApp.WinClinet.Views.ProductCategories
                 var view = viewEngine.ViewInForm<ParameterEditor>(editor =>
                 {
                     editor.Entity = parametersGrid.CurrentItem;
-                });
+                },true);
                 if (view.DialogResult == DialogResult.OK)
                 {
                     paramsRepo.Update(view.Entity);

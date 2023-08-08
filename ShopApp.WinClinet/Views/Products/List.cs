@@ -15,11 +15,15 @@ namespace ShopApp.WinClinet.Views.Products
 
         RepositoryAbstracts.IProductsRepository productsRepo;
         Framework.GridControl<Entities.Product> productsGrid;
+        RepositoryAbstracts.IProductParametersRepository paramsRepo;
+        RepositoryAbstracts.IProductParametersValuesRepository paramsValuesRepo;
         public int? ProductCategoryId { get; set; }
-        public List(RepositoryAbstracts.IProductsRepository productsRepo)
+        public List(RepositoryAbstracts.IProductsRepository productsRepo, RepositoryAbstracts.IProductParametersRepository paramsRepo, RepositoryAbstracts.IProductParametersValuesRepository paramsValuesRepo)
         {
             InitializeComponent();
             this.productsRepo = productsRepo;
+            this.paramsRepo = paramsRepo;
+            this.paramsValuesRepo = paramsValuesRepo;
 
             AddAction("جدید", btn =>
             {
@@ -39,7 +43,22 @@ namespace ShopApp.WinClinet.Views.Products
                 },true);
                 if (view.DialogResult == DialogResult.OK)
                 {
+                   
                     productsRepo.Update(view.Entity);
+                    var oldParameters = paramsValuesRepo.GetByProductId(view.Entity.ID);
+                    foreach (var param in oldParameters)
+                    {
+                        paramsValuesRepo.Remove(param);
+                    }
+                    foreach (var param in view.ParametersControls)
+                    {
+                        paramsValuesRepo.Add(new Entities.ProductParametersValue
+                        {
+                            ProductId = view.Entity.ID,
+                            ProductParameterId = param.Key.ID,
+                            Value = param.Value.Text
+                        });
+                    }
                     productsGrid.ResetBindings();
                 }
             });
