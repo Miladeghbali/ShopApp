@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Framework
 {
-    class ExpressionHandler:ExpressionVisitor
+   public class ExpressionHandler:ExpressionVisitor
     {
         List<string> visitedProperties = new List<string>();
         public string GetPropertyName(Expression expression)

@@ -34,6 +34,14 @@ namespace ShopApp.WinClinet
             baseInfo.AddMenu("انبار ها", null, (s, e) => { ViewEngine.ViewInTab<Views.Inventories.List>(); });
             baseInfo.AddMenu("دسته بندی محصولات",null,(s,e)=>ViewEngine.ViewInTab<Views.ProductCategories.List>());
             baseInfo.AddMenu("محصولات",null, (s, e) => ViewEngine.ViewInTab<Views.Products.List>());
+            baseInfo.AddMenu("انواع رسید",null, (s, e) => ViewEngine.ViewInTab<Views.InventoryInsTypes.List>());
+
+            //-------------------
+            var inventoryMenu = AddMenu("انبار");
+            inventoryMenu.AddMenu("رسید ها",null,(s,e)=> 
+            {
+                ViewEngine.ViewInTab<Views.InventoryIns.List>();
+            });
             //baseInfo.AddMenu("گروه های کالا");
             //baseInfo.AddMenu("کالا ها ");
             //-------------------------------

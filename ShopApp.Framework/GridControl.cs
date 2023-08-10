@@ -12,6 +12,21 @@ namespace ShopApp.Framework
     {
         DataGridView grid;
         BindingSource bindingSource;
+
+        public bool AllowAddRows {
+            get { return grid.AllowUserToAddRows; }
+            set { grid.AllowUserToAddRows=value; }
+        }
+        public bool AllowDeleteRows
+        {
+            get { return grid.AllowUserToDeleteRows; }
+            set { grid.AllowUserToDeleteRows = value; }
+        }
+        public DataGridViewEditMode EditMode
+        {
+            get { return grid.EditMode; }
+            set { grid.EditMode = value; }
+        }
         public GridControl(Control container)
         {
             grid =new DataGridView();

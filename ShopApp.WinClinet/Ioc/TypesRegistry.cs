@@ -12,6 +12,7 @@ namespace ShopApp.WinClinet.Ioc
     {
         public TypesRegistry()
         {
+           
             For<IProductParametersValuesRepository>().Use<ProductParametersValuesRepository>();
             For<IProductsRepository>().Use<ProductsRepository>();
             For<IProductParametersRepository>().Use<ProductParametersRepository>();
@@ -22,6 +23,10 @@ namespace ShopApp.WinClinet.Ioc
             For<IUsersRepository>().Use<UsersRepository>();
             For<IFinancialYearsRepository>().Use<FinancialYearsRepository>();
             For<IDbTools>().Use<SqlDbTools>();
+
+            For<IInventoryInsTypesRepository>().Use<InventoryInsTypesRepository>();
+            For<IInventoryInsHeadersRepository>().Use<InventoryInsHeadersRepository>();
+            For<IInventoryInsDetailsRepository>().Use<InventoryInsDetailsRepository>();
         }
 
     }
