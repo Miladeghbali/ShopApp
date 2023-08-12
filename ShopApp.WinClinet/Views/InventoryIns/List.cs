@@ -20,17 +20,10 @@ namespace ShopApp.WinClinet.Views.InventoryIns
             this.headersRepo = headersRepo;
             AddAction("جدید", btn =>
             {
-                 viewEngine.ViewInForm<Editor>();
-              
+                 viewEngine.ViewInForm<Editor>(null,true);
+                 grid.setDataSource(headersRepo.All());
             });
-            AddAction("ویرایش", btn =>
-            {
-               
-            });
-            AddAction("حذف", btn =>
-            {
-              
-            });
+          
         }
         protected override void OnLoad(EventArgs e)
         {

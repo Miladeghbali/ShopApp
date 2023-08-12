@@ -8,10 +8,17 @@ using System.Windows.Forms;
 
 namespace ShopApp.Framework
 {
+    public class GridControlButtomModel
+    {
+        public string Text { get; set; }
+        public Action<DataGridViewRow> OnClick { get; set; }
+    }
     public class GridControl<TModel>
     {
         DataGridView grid;
         BindingSource bindingSource;
+
+        Dictionary<int, GridControlButtomModel> gridButtons = new Dictionary<int, GridControlButtomModel>();
 
         public bool AllowAddRows {
             get { return grid.AllowUserToAddRows; }
@@ -38,8 +45,42 @@ namespace ShopApp.Framework
             grid.AllowUserToOrderColumns = true;
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;        
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.RowPrePaint += Grid_RowPrePaint;
+            grid.CellContentClick += Grid_CellContentClick;
         }
+
+        private void Grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridButtons.ContainsKey(e.ColumnIndex))
+            {
+                gridButtons[e.ColumnIndex].OnClick(grid.Rows[e.RowIndex]);
+            }
+        }
+
+        private void Grid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            foreach (var  item in gridButtons)
+            {
+                grid.Rows[e.RowIndex].Cells[item.Key].Value = item.Value.Text;
+            }
+        }
+
+        public GridControl<TModel> AddButtonColumn(string title,Action<DataGridViewRow> onClick)
+        {
+            grid.Columns.Add(new DataGridViewButtonColumn()
+            {
+                Text=title
+
+            });
+            gridButtons.Add(grid.Columns.Count - 1, new GridControlButtomModel()
+            {
+                Text = title,
+                OnClick = onClick
+            });
+            return this;
+        }
+
         public  GridControl<TModel> AddTextBoxColumn<TProperty>(Expression<Func<TModel,TProperty>>selector,string title)
         {
             var propertyName = new ExpressionHandler().GetPropertyName(selector);

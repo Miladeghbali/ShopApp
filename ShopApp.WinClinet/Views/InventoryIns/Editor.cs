@@ -20,15 +20,20 @@ namespace ShopApp.WinClinet.Views.InventoryIns
         public Entities.InventoryInsHeader InvHeader { get; set; }
         RepositoryAbstracts.IInventoriesRepository invRepo;
         RepositoryAbstracts.IInventoryInsTypesRepository typesRepo;
+        RepositoryAbstracts.IInventoryInsDetailsRepository detailsRepo;
+        RepositoryAbstracts.IInventoryInsHeadersRepository insRepo;
+
         Framework.GridControl<Entities.InventoryInsDetail> grid;
         List<Entities.InventoryInsDetail> details=new List<Entities.InventoryInsDetail>();
+       
 
-
-        public Editor(RepositoryAbstracts.IInventoriesRepository invRepo, RepositoryAbstracts.IInventoryInsTypesRepository typesRepo)
+        public Editor(RepositoryAbstracts.IInventoriesRepository invRepo, RepositoryAbstracts.IInventoryInsTypesRepository typesRepo, RepositoryAbstracts.IInventoryInsDetailsRepository detailsRepo, RepositoryAbstracts.IInventoryInsHeadersRepository insRepo)
         {
             InitializeComponent();
             this.invRepo = invRepo;
             this.typesRepo = typesRepo;
+            this.detailsRepo = detailsRepo;
+            this.insRepo = insRepo;
 
             InventoriesComboBox.DataSource = this.invRepo.All();
             InventoriesComboBox.DisplayMember = "Title";
@@ -40,10 +45,17 @@ namespace ShopApp.WinClinet.Views.InventoryIns
 
             AddAction("تایید", btn =>
             {
+                if(InvHeader.ID == 0) 
+                    insRepo.Add(InvHeader);
+                else
+                    insRepo.Update(InvHeader);
+                var oldItems=detailsRepo.GetByInventoryInsHeaderId(InvHeader.ID);
                 foreach (var item in details)
                 {
-                    MessageBox.Show(item.ProductId.ToString());
+                    item.InventoryInsHeaderId = InvHeader.ID;
+                    detailsRepo.Add(item);                    
                 }
+                CloseView(DialogResult.OK);
             });
 
         }
@@ -51,6 +63,10 @@ namespace ShopApp.WinClinet.Views.InventoryIns
         {
             if(InvHeader==null)
                 InvHeader= new Entities.InventoryInsHeader { Date = DateTime.Now };
+            InventoriesComboBox.DataBindings.Add("SelectedValue", InvHeader, "InventoryId");
+            InsTypeComboBox.DataBindings.Add("SelectedValue", InvHeader, "TypeId");
+            TitleTextBox.DataBindings.Add("Text", InvHeader, "Title");
+            DescriptionsTextBox.DataBindings.Add("Text", InvHeader, "Description");            
             Expression<Func<Entities.InventoryInsHeader, DateTime>> selector = header => header.Date;
             var propertyName = new Framework.ExpressionHandler().GetPropertyName(selector);          
             DateDropdown.Value = selector.Compile()(InvHeader).ToString("yyyy/MM/dd");
@@ -83,6 +99,17 @@ namespace ShopApp.WinClinet.Views.InventoryIns
             };
             grid = new Framework.GridControl<Entities.InventoryInsDetail>(GridContainerPanel);
             grid.AddTextBoxColumn(detail => detail.ProductId, "شناسه محصول");
+            grid.AddButtonColumn("انتخاب", row =>
+            {
+               var view=viewEngine.ViewInForm<Views.Products.List>(v =>
+                {
+                    v.SelectorMode = true;
+                }, true);
+                if(view.DialogResult==DialogResult.OK) 
+                {
+                    row.Cells[0].Value = view.SelectedProduct.ID;  
+                }
+            });
             grid.AddTextBoxColumn(detail => detail.Amount, "مقدار");
             grid.AddTextBoxColumn(detail => detail.TotalPrice, "قیمت");
             grid.AllowAddRows=true;

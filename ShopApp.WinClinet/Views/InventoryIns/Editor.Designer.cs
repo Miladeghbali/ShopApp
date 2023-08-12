@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.GridContainerPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.ControlsContainerPanel = new System.Windows.Forms.Panel();
             this.DescriptionsTextBox = new System.Windows.Forms.TextBox();
             this.DescriptionsLabel = new System.Windows.Forms.Label();
@@ -40,16 +40,20 @@
             this.InventoriesLabel = new System.Windows.Forms.Label();
             this.InsTypeComboBox = new System.Windows.Forms.ComboBox();
             this.InventoriesComboBox = new System.Windows.Forms.ComboBox();
+            this.GridContainerPanel = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.ControlsContainerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // GridContainerPanel
+            // panel1
             // 
-            this.GridContainerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.GridContainerPanel.Location = new System.Drawing.Point(0, 129);
-            this.GridContainerPanel.Name = "GridContainerPanel";
-            this.GridContainerPanel.Size = new System.Drawing.Size(811, 373);
-            this.GridContainerPanel.TabIndex = 1;
+            this.panel1.Controls.Add(this.GridContainerPanel);
+            this.panel1.Controls.Add(this.ControlsContainerPanel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(811, 502);
+            this.panel1.TabIndex = 1;
             // 
             // ControlsContainerPanel
             // 
@@ -63,11 +67,11 @@
             this.ControlsContainerPanel.Controls.Add(this.InventoriesLabel);
             this.ControlsContainerPanel.Controls.Add(this.InsTypeComboBox);
             this.ControlsContainerPanel.Controls.Add(this.InventoriesComboBox);
-            this.ControlsContainerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ControlsContainerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ControlsContainerPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlsContainerPanel.Name = "ControlsContainerPanel";
             this.ControlsContainerPanel.Size = new System.Drawing.Size(811, 129);
-            this.ControlsContainerPanel.TabIndex = 2;
+            this.ControlsContainerPanel.TabIndex = 4;
             // 
             // DescriptionsTextBox
             // 
@@ -149,6 +153,7 @@
             // InsTypeComboBox
             // 
             this.InsTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.InsTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.InsTypeComboBox.FormattingEnabled = true;
             this.InsTypeComboBox.Location = new System.Drawing.Point(361, 11);
             this.InsTypeComboBox.Name = "InsTypeComboBox";
@@ -158,22 +163,30 @@
             // InventoriesComboBox
             // 
             this.InventoriesComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.InventoriesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.InventoriesComboBox.FormattingEnabled = true;
             this.InventoriesComboBox.Location = new System.Drawing.Point(582, 11);
             this.InventoriesComboBox.Name = "InventoriesComboBox";
             this.InventoriesComboBox.Size = new System.Drawing.Size(150, 21);
             this.InventoriesComboBox.TabIndex = 0;
             // 
+            // GridContainerPanel
+            // 
+            this.GridContainerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GridContainerPanel.Location = new System.Drawing.Point(0, 129);
+            this.GridContainerPanel.Name = "GridContainerPanel";
+            this.GridContainerPanel.Size = new System.Drawing.Size(811, 373);
+            this.GridContainerPanel.TabIndex = 3;
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ControlsContainerPanel);
-            this.Controls.Add(this.GridContainerPanel);
+            this.Controls.Add(this.panel1);
             this.Name = "Editor";
             this.Size = new System.Drawing.Size(811, 539);
-            this.Controls.SetChildIndex(this.GridContainerPanel, 0);
-            this.Controls.SetChildIndex(this.ControlsContainerPanel, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
+            this.panel1.ResumeLayout(false);
             this.ControlsContainerPanel.ResumeLayout(false);
             this.ControlsContainerPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -182,17 +195,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel GridContainerPanel;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel ControlsContainerPanel;
-        private System.Windows.Forms.Label InventoriesLabel;
-        private System.Windows.Forms.ComboBox InventoriesComboBox;
-        private Framework.Dropdown DateDropdown;
-        private System.Windows.Forms.Label InsTypeLabel;
-        private System.Windows.Forms.ComboBox InsTypeComboBox;
         private System.Windows.Forms.TextBox DescriptionsTextBox;
         private System.Windows.Forms.Label DescriptionsLabel;
         private System.Windows.Forms.TextBox TitleTextBox;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label DateLabel;
+        private Framework.Dropdown DateDropdown;
+        private System.Windows.Forms.Label InsTypeLabel;
+        private System.Windows.Forms.Label InventoriesLabel;
+        private System.Windows.Forms.ComboBox InsTypeComboBox;
+        private System.Windows.Forms.ComboBox InventoriesComboBox;
+        private System.Windows.Forms.Panel GridContainerPanel;
     }
 }
